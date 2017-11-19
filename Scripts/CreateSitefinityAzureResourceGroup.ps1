@@ -1,11 +1,11 @@
 ﻿param(
-    $WebsiteRootDirectory = "",
-    $DatabaseName = "",
-    $SqlServer = "",
-    $ResourceGroupName = "",
+    $WebsiteRootDirectory = "C:\Program Files (x86)\Progress\Sitefinity\Projects\sftest",
+    $DatabaseName = "sftestdb",
+    $SqlServer = "DESKTOP-73A4MLB",
+    $ResourceGroupName = "sftestRG",
     $AzureAccount = "",
     $AzureAccountPassword = "",
-    $ResourceGroupLocation = "West Europe",
+    $ResourceGroupLocation = "East US",
     $TemplateFile = "$PSScriptRoot\Templates\Default.json",
     $TemplateParameterFile = "$PSScriptRoot\Templates\Default.params.json",
     $BuildConfiguration = "Release"
@@ -19,11 +19,12 @@ $sitefinityProject = Join-Path $websiteRootDirectory "SitefinityWebApp.csproj"
 $bacpacDatabaseFile = "$PSScriptRoot\temp\$DatabaseName.bacpac"
 $sqlConnectionUser = $templateParams.parameters.sqlServerAdminLogin.value
 $sqlConnectionServer = "$($templateParams.parameters.sqlServerName.value).database.windows.net"
-$sqlConnectionUsername = "$sqlConnectionUser@$sqlConnectionServer" 
+$sqlConnectionUsername = "$sqlConnectionUser@$sqlConnectionServer"
 
 $systemConfigPath = Join-Path $websiteRootDirectory "App_Data\Sitefinity\Configuration\SystemConfig.config"
 $outputPath = Join-Path $websiteRootDirectory "pkg"
 $buildParameters = "OutputPath=$outputPath;IgnoreDeployManagedRuntimeVersion=true;FilesToIncludeForPublish=AllFilesInProjectFolder"
+
 
 # Create new azure resource group
 NewAzureResourceGroup -ResourceGroupName $ResourceGroupName `
@@ -34,11 +35,12 @@ NewAzureResourceGroup -ResourceGroupName $ResourceGroupName `
                       -TemplateParameterFile $TemplateParameterFile
 
 # Configure powershell with publishsettings for your subscription
-Import-AzurePublishSettingsFile "$PSScriptRoot\$($config.files.subscriptionPublishSettings)"
-Set-AzureSubscription -SubscriptionName $config.azure.subscription
-Select-AzureSubscription -SubscriptionName $config.azure.subscription
+#Import-AzurePublishSettingsFile "$PSScriptRoot\$($config.files.subscriptionPublishSettings)"
+Select-AzureRMSubscription -SubscriptionName $config.azure.subscription
+#Set-AzureSubscription -SubscriptionName $config.azure.subscription
+#Select-AzureSubscription -SubscriptionName $config.azure.subscription
 
-CreateDatabasePackage $sqlServer $DatabaseName $bacpacDatabaseFile 
+CreateDatabasePackage $sqlServer $DatabaseName $bacpacDatabaseFile
 DeployDatabasePackage $bacpacDatabaseFile $templateParams.parameters.sqlDatabaseName.value $sqlConnectionServer $templateParams.parameters.sqlServerAdminLogin.value $templateParams.parameters.sqlServerAdminLoginPassword.value
 
 # Update Sitefinity web.config and DataConfig.config with database settings.

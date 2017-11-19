@@ -72,5 +72,13 @@ function Get-SqlPackageExePath
 function BuildSln($sln, $target, $configuration, $paramsAsString)
 {
 	LogMessage "Start building '$sln'"
-    & $MsBuildExe $sln /t:$target /p:Configuration=$configuration /p:$paramsAsString
+    & $MsBuildExe $sln /
+    t:$target /p:Configuration=$configuration /p:$paramsAsString
+}
+
+function loginAzure($AzureAccount, $AzureAccountPassword)
+{
+    $secpassword = ConvertTo-SecureString $AzureAccountPassword -AsPlainText -Force
+    $credentials = New-Object System.Management.Automation.PSCredential ($AzureAccount, $secpassword)
+    Add-AzureRmAccount -Credential $credentials
 }

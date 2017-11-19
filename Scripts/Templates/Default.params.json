@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "siteName": {
-            "value": ""
+            "value": "sftest-mvalerio"
         },
         "hostingPlanName": {
-            "value": ""
+            "value": "sfhostingplan"
         },
         "siteLocation": {
-            "value": "West Europe"
+            "value": "East US"
         },
 		"sku": {
 			"value": "Basic"
@@ -21,25 +21,25 @@
             "value": 2
         },
         "sqlServerName": {
-            "value": ""
+            "value": "sf-sqlserver"
         },
         "sqlDatabaseName": {
-            "value": ""
+            "value": "sftestdb"
         },
         "sqlServerLocation": {
-            "value": "West Europe"
+            "value": "East US"
         },
         "sqlServerAdminLogin": {
-            "value": ""
+            "value": "sfadmin"
         },
 		"sqlServerAdminLoginPassword": {
-            "value": ""
+            "value": "AdvizeX20171"
         },
         "redisCacheName": {
-            "value": ""
+            "value": "sfcache"
         },
         "redisCacheLocation": {
-            "value": "West Europe"
+            "value": "East US"
         },
         "redisCacheSKUName": {
             "value": "Standard"
@@ -48,10 +48,10 @@
             "value": 0
         },
 		"azureSearchName": {
-            "value": ""
+            "value": "sftestsearch2"
         },
         "azureSearchLocation": {
-            "value": "West Europe"
+            "value": "East US"
         },
         "azureSearchSku": {
             "value": "standard"

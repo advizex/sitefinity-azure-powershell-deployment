@@ -15,8 +15,10 @@ to Azure App Services. The deployment will set the minimal Pricing Tiers for the
       [Parameter(Mandatory=$True)]$databaseName,
       [Parameter(Mandatory=$True)]$sqlServer,
       [Parameter(Mandatory=$True)]$websiteName,
+      [Parameter(Mandatory=$True)]$azureAccount,
+      [Parameter(Mandatory=$True)]$azureAccountPassword,
       $redisCacheConnectionString,
-      $websiteLocation = "West Europe",
+      $websiteLocation = "East US",
       $deployDatabase = $true,
       $buildConfiguration = "Release",
       $launchWebsite = $true)
@@ -44,10 +46,17 @@ $systemConfigPath = Join-Path $websiteRootDirectory "App_Data\Sitefinity\Configu
 $outputPath = Join-Path $websiteRootDirectory "pkg"
 $buildParameters = "OutputPath=$outputPath;IgnoreDeployManagedRuntimeVersion=true;FilesToIncludeForPublish=AllFilesInProjectFolder"
 
+#$secpassword = ConvertTo-SecureString $azureAccountPassword -AsPlainText -Force
+#$credentials = New-Object System.Management.Automation.PSCredential ($azureAccount, $secpassword)
+#Add-AzureRmAccount -Credential $credentials
+
 # Configure powershell with publishsettings for your subscription
-Import-AzurePublishSettingsFile "$PSScriptRoot\$($config.files.subscriptionPublishSettings)"
-Set-AzureSubscription -SubscriptionName $config.azure.subscription
-Select-AzureSubscription -SubscriptionName $config.azure.subscription
+
+# Import-AzurePublishSettingsFile "$PSScriptRoot\$($config.files.subscriptionPublishSettings)"
+#Set-AzureSubscription -SubscriptionName $config.azure.subscription
+
+Select-AzureRMSubscription -SubscriptionName $config.azure.subscription
+
 $subscription = Get-AzureSubscription $config.azure.subscription
 LogMessage "Azure Cloud Service deploy script started."
 LogMessage "Preparing deployment of $deploymentLabel for $($subscription.subscriptionname) with Subscription ID $($subscription.subscriptionid)."

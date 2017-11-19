@@ -2,27 +2,27 @@
   "azure": {
     "sql": [
       {
-        "location": "",
-        "serverName": "yourServerName",
-        "server": "yourServerName.database.windows.net",
-        "user": "yourUsername",
-        "password": "yourPassword"
+        "location": "East US",
+        "serverName": "sfSqlServer",
+        "server": "sfSqlServer.database.windows.net",
+        "user": "sfadmin",
+        "password": "AdvizeX20171"
       }
     ],
-    "subscription": "",
-    "accountsLocation": "West Europe",
+    "subscription": "msdn",
+    "accountsLocation": "East US",
     "roleName": "SitefinityWebApp",
-    "environment": "Production",
+    "environment": "test2",
     "timeStampFormat": "g",
-    "resourceGroupName": "",
-    "azureAccount": "myschoolaccount@mydomain.onmicrosoft.com",
+    "resourceGroupName": "SITEFINITY-SM",
+    "azureAccount": "",
     "azureAccountPassword": "",
     "alwaysDeleteExistingDeployments": "1",
     "enableDeploymentUpgrade": "1",
     "sslEndpointName": "SslEndpoint",
     "storageAccountKey": ""
   },
-	"files": { 
+	"files": {
 		"serviceDefinition": "../CloudConfigs/ServiceDefinition.csdef",
 		"roleProperties": "../CloudConfigs/RoleProperties.txt",
 		"cloudConfig": "../CloudConfigs/ServiceConfiguration.Cloud.cscfg",
@@ -55,7 +55,7 @@
         }
     ],
     "certificate":
-    {		
+    {
 		"path":"path to your certificate",
 		"password":"your remote access password",
         "name": "Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption",

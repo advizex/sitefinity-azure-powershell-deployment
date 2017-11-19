@@ -23,7 +23,7 @@ param([Parameter(Mandatory=$True)]$websiteRootDirectory,
       $enableRedisCache = "false",
       $deployDatabase = "true",
       $instanceCount = '1',
-      $accountLocation = "West Europe"
+      $accountLocation = "East US"
 )
       
 . "$PSScriptRoot\Modules.ps1"

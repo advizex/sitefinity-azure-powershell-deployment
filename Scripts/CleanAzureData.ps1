@@ -1,7 +1,7 @@
 ﻿param($azureDatabaseName,
 	  $cloudServiceName,
 	  $storageAccountName,
-      $accountLocation = "West Europe")
+      $accountLocation = "East US")
 
 . "$PSScriptRoot\Modules.ps1"
 

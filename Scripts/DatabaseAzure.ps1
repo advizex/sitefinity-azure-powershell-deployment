@@ -12,6 +12,14 @@ function CreateDatabasePackage($sqlServer, $databaseName, $bacpacDatabaseFile)
 function DeployDatabasePackage($bacpacDatabaseFile, $databaseName, $azureServer, $user, $password)
 {
     LogMessage "Importing database package..."
+    Write-Host "sqlpackegeExe =  '$sqlpackageExe' "
+    Write-Host "bacpacDatabaseFile = '$bacpacDatabaseFile' "
+    Write-Host "databaseName = '$databaseName' "
+    Write-Host "azureServer = '$azureServer' "
+    Write-Host "user = '$user' "
+    Write-Host "password = '$password' "
+    
+
     try
     {
     & $sqlpackageExe /a:Import /sf:$bacpacDatabaseFile /tsn:$azureServer /tdn:$databaseName /tu:$user /tp:$password /p:DatabaseEdition="Basic"
